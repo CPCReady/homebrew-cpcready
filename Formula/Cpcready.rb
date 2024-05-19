@@ -30,7 +30,8 @@ class Cpcready < Formula
   
     def install
       # Crear el directorio /opt/CPCReady si no existe
-      # uses_from_macos "jq"
+      bin.install "CPCReady"
+            # uses_from_macos "jq"
       # uses_from_macos "dos2unix"
       # opt_prefix = Pathname.new("$HOME/CPCReady")
       # opt_prefix.mkpath
