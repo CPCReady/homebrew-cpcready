@@ -58,7 +58,7 @@ class Cpcready < Formula
       bin.install "console"
       bin.install "about"
       bin.install "configuration"
-      bin.install "cpc"
+      share.install "cpc"
       # # Copiar todos los archivos al directorio /opt/CPCReady
       # opt_prefix.install Dir["*"]
   
@@ -71,7 +71,7 @@ class Cpcready < Formula
   
     test do
       # Comprobar que el software se instaló correctamente y puede ejecutarse
-      system "#{bin}/pepe", "--version"
+      system "#{bin}/about", "--version"
       # assert_predicate "/opt/CPCReady/bin/about", :exist?
       # assert_match "expected_output", shell_output("#{bin}/about --version")
     end
