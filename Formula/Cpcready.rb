@@ -39,8 +39,16 @@ class Cpcready < Formula
       #     export SDKMAN_DIR="$HOME/.sdkman"
       #     . "$HOME/.sdkman/bin/sdkman-init.sh"
       # SHELL
+      # on_linux do
+      #   depends_on "util-linux"
+      # end
+      install_dir = File.expand_path("~/.CPCReady")
 
-      opt.install "CPCReady"
+      # Crea la carpeta si no existe
+      mkdir_p install_dir
+  
+      # Copia todos los archivos a la carpeta de instalación
+      cp_r Dir["*"], install_dir
             # uses_from_macos "jq"
       # uses_from_macos "dos2unix"
       # opt_prefix = Pathname.new("$HOME/CPCReady")
