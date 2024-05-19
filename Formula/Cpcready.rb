@@ -30,7 +30,7 @@ class Cpcready < Formula
   
     def install
       # Crear el directorio /opt/CPCReady si no existe
-      opt_prefix = Pathname.new("~/CPCReady")
+      opt_prefix = Pathname.new("$HOME/CPCReady")
       opt_prefix.mkpath
   
       # Copiar todos los archivos al directorio /opt/CPCReady
