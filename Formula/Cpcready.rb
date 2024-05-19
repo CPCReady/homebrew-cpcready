@@ -39,7 +39,7 @@ class Cpcready < Formula
       # # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
       # (opt_prefix/"bin").each_child do |executable|
       #   bin.install_symlink executable
-      end
+      # end
     end
   
     test do
