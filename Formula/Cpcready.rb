@@ -62,6 +62,7 @@ class Cpcready < Formula
       # (opt_prefix/"bin").each_child do |executable|
       #   bin.install_symlink executable
       # end
+      bin.install_symlink Dir["#{install_dir}/bin/*"]
     end
   
     test do
