@@ -25,8 +25,8 @@ class Cpcready < Formula
     desc "CPCReady SDK"
     homepage "https://github.com/CPCReady/sdk"
     # version "1.0.1"
-    url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-    sha256 "7e006dd18d7e987a2959f0c21546b6208c312a2f56c20086bfc3ccc3332aa553"
+    url "https://github.com/CPCReady/sdk/releases/download/v1.0.2/CPCReady.tar.gz"
+    sha256 "8310a5d021019849675c14f4be546f507280f73105ed98aeefd26e35666862e6"
   
     def install
       # Crear el directorio /opt/CPCReady si no existe
@@ -42,19 +42,19 @@ class Cpcready < Formula
       # on_linux do
       #   depends_on "util-linux"
       # end
-      install_dir = File.expand_path("~/CPCReady")
+    #   install_dir = File.expand_path("~/CPCReady")
 
-      # Crea la carpeta si no existe
-      mkdir_p install_dir
+    #   # Crea la carpeta si no existe
+    #   mkdir_p install_dir
   
-      # Copia todos los archivos a la carpeta de instalación
-    # Copia todos los archivos a la carpeta de instalación
-      cp_r Dir["*"], install_dir
+    #   # Copia todos los archivos a la carpeta de instalación
+    # # Copia todos los archivos a la carpeta de instalación
+    #   cp_r Dir["*"], install_dir
             # uses_from_macos "jq"
       # uses_from_macos "dos2unix"
       # opt_prefix = Pathname.new("$HOME/CPCReady")
       # opt_prefix.mkpath
-  
+      bin.install "pepe"
       # # Copiar todos los archivos al directorio /opt/CPCReady
       # opt_prefix.install Dir["*"]
   
@@ -62,13 +62,14 @@ class Cpcready < Formula
       # (opt_prefix/"bin").each_child do |executable|
       #   bin.install_symlink executable
       # end
-      bin.install_symlink Dir["#{install_dir}/bin/*"]
+      # bin.install_symlink Dir["#{install_dir}/bin/*"]
     end
   
     test do
       # Comprobar que el software se instaló correctamente y puede ejecutarse
-      assert_predicate "/opt/CPCReady/bin/about", :exist?
-      assert_match "expected_output", shell_output("#{bin}/about --version")
+      system "#{bin}/pepe", "--version"
+      # assert_predicate "/opt/CPCReady/bin/about", :exist?
+      # assert_match "expected_output", shell_output("#{bin}/about --version")
     end
   end
   
