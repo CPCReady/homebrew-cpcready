@@ -30,15 +30,15 @@ class Cpcready < Formula
   
     def install
       # Crear el directorio /opt/CPCReady si no existe
-      opt_prefix = Pathname.new("/CPCReady")
+      opt_prefix = Pathname.new("~/CPCReady")
       opt_prefix.mkpath
   
       # Copiar todos los archivos al directorio /opt/CPCReady
       opt_prefix.install Dir["*"]
   
-      # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
-      (opt_prefix/"bin").each_child do |executable|
-        bin.install_symlink executable
+      # # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
+      # (opt_prefix/"bin").each_child do |executable|
+      #   bin.install_symlink executable
       end
     end
   
