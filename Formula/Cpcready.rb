@@ -2,7 +2,7 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-  sha256 "9744e959095cb4fb329109eab67000ca73d4040c914017953e73376153fceb1b"
+  sha256 "b2157044787f3dff02a7d0a06a43ecde84fdb0f28b34d38cc33f736193fcb8bc"
 
   # resource "python_wheel" do
   #   url "https://example.com/python_wheel.whl"
