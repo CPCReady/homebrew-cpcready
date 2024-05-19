@@ -26,7 +26,7 @@ class Cpcready < Formula
     homepage "https://github.com/CPCReady/sdk"
     # version "1.0.1"
     url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-    sha256 "8310a5d021019849675c14f4be546f507280f73105ed98aeefd26e35666862e6"
+    sha256 "9744e959095cb4fb329109eab67000ca73d4040c914017953e73376153fceb1b"
   
     def install
       # Crear el directorio /opt/CPCReady si no existe
