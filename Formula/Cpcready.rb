@@ -42,7 +42,7 @@ class Cpcready < Formula
       # on_linux do
       #   depends_on "util-linux"
       # end
-      install_dir = File.expand_path("/opt/CPCReady")
+      install_dir = File.expand_path("~/CPCReady")
 
       # Crea la carpeta si no existe
       mkdir_p install_dir
