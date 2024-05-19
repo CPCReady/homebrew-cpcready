@@ -4,20 +4,36 @@ class Cpcready < Formula
   url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
   sha256 "9744e959095cb4fb329109eab67000ca73d4040c914017953e73376153fceb1b"
 
+  # resource "python_wheel" do
+  #   url "https://example.com/python_wheel.whl"
+  #   sha256 "sha256-del-archivo.whl"
+  # end
+
   def install
     # Instala los archivos binarios en el directorio 'bin'
-    bin.install "cls", "console", "about", "configuration"
+    bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
 
     # Instala los archivos de datos en el directorio 'share'
-    share.install "cpc"
+    share.install "VERSION"
+
+    # # Verifica si la versión de Python es 3.10 o superior
+    # python_version = Utils.safe_popen_read("python3", "--version").chomp
+    # if python_version.start_with?("Python 3.10", "Python 3.11")
+    #   # Instala el archivo Wheel de Python en el directorio 'libexec'
+    #   libexec.install resource("python_wheel")
+    #   # Instala el archivo Wheel en el entorno del sistema
+    #   system "python3", "-m", "pip", "install", libexec/"python_wheel.whl"
+    # else
+    #   opoo "Python 3.10 or newer is required to install this package. Skipping installation of Python Wheel."
+    # end
   end
 
   test do
     # Verifica que los ejecutables se instalaron correctamente
     assert_equal "1.0.1", shell_output("#{bin}/about --version").strip
 
-    # Verifica que el archivo 'cls' se puede leer desde el directorio 'share'
-    assert_predicate share/"cpc/cls", :exist?
+    # Verifica que el archivo 'VERSION' se puede leer desde el directorio 'share'
+    assert_predicate share/"VERSION", :exist?
   end
 end
 
