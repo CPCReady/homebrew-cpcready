@@ -48,6 +48,7 @@ class Cpcready < Formula
       mkdir_p install_dir
   
       # Copia todos los archivos a la carpeta de instalación
+    # Copia todos los archivos a la carpeta de instalación
       cp_r Dir["*"], install_dir
             # uses_from_macos "jq"
       # uses_from_macos "dos2unix"
