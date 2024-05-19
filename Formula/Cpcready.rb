@@ -42,27 +42,27 @@ class Cpcready < Formula
       # on_linux do
       #   depends_on "util-linux"
       # end
-      install_dir = File.expand_path("~/.CPCReady")
+    #   install_dir = File.expand_path("/opt/CPCReady")
 
-      # Crea la carpeta si no existe
-      mkdir_p install_dir
+    #   # Crea la carpeta si no existe
+    #   mkdir_p install_dir
   
-      # Copia todos los archivos a la carpeta de instalación
-    # Copia todos los archivos a la carpeta de instalación
-      cp_r Dir["*"], install_dir
-            # uses_from_macos "jq"
-      # uses_from_macos "dos2unix"
-      # opt_prefix = Pathname.new("$HOME/CPCReady")
-      # opt_prefix.mkpath
+    #   # Copia todos los archivos a la carpeta de instalación
+    # # Copia todos los archivos a la carpeta de instalación
+    #   cp_r Dir["*"], install_dir
+    #         # uses_from_macos "jq"
+    #   # uses_from_macos "dos2unix"
+    #   # opt_prefix = Pathname.new("$HOME/CPCReady")
+    #   # opt_prefix.mkpath
   
-      # # Copiar todos los archivos al directorio /opt/CPCReady
-      # opt_prefix.install Dir["*"]
+    #   # # Copiar todos los archivos al directorio /opt/CPCReady
+    #   # opt_prefix.install Dir["*"]
   
-      # # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
-      # (opt_prefix/"bin").each_child do |executable|
-      #   bin.install_symlink executable
-      # end
-      bin.install_symlink Dir["#{install_dir}/bin/*"]
+    #   # # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
+    #   # (opt_prefix/"bin").each_child do |executable|
+    #   #   bin.install_symlink executable
+    #   # end
+    #   bin.install_symlink Dir["#{install_dir}/bin/*"]
     end
   
     test do
