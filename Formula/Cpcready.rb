@@ -30,7 +30,17 @@ class Cpcready < Formula
   
     def install
       # Crear el directorio /opt/CPCReady si no existe
-      bin.install "CPCReady"
+
+      # bash_shellenv.install <<-SHELL
+      # export SDKMAN_DIR="$HOME/.sdkman"
+      # . "$HOME/.sdkman/bin/sdkman-init.sh"
+      # SHELL
+      # zsh_shellenv.install <<-SHELL
+      #     export SDKMAN_DIR="$HOME/.sdkman"
+      #     . "$HOME/.sdkman/bin/sdkman-init.sh"
+      # SHELL
+
+      opt.install "CPCReady"
             # uses_from_macos "jq"
       # uses_from_macos "dos2unix"
       # opt_prefix = Pathname.new("$HOME/CPCReady")
