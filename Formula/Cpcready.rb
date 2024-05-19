@@ -25,7 +25,7 @@ class Cpcready < Formula
     desc "CPCReady SDK"
     homepage "https://github.com/CPCReady/sdk"
     # version "1.0.1"
-    url "https://github.com/CPCReady/sdk/releases/download/v1.0.2/CPCReady.tar.gz"
+    url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
     sha256 "8310a5d021019849675c14f4be546f507280f73105ed98aeefd26e35666862e6"
   
     def install
