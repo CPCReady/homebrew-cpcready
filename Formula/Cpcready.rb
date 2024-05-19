@@ -54,7 +54,11 @@ class Cpcready < Formula
       # uses_from_macos "dos2unix"
       # opt_prefix = Pathname.new("$HOME/CPCReady")
       # opt_prefix.mkpath
-      bin.install "pepe"
+      bin.install "cls"
+      bin.install "console"
+      bin.install "about"
+      bin.install "configuration"
+      bin.install "cpc"
       # # Copiar todos los archivos al directorio /opt/CPCReady
       # opt_prefix.install Dir["*"]
   
