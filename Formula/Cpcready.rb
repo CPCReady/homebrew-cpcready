@@ -21,7 +21,7 @@
 #     end
 #   end
 
-  class CpcReady < Formula
+class Cpcready < Formula
     desc "CPCReady SDK"
     homepage "https://github.com/CPCReady/sdk"
     version "1.0.1"
