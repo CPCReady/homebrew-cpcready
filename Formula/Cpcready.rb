@@ -20,11 +20,8 @@ class Cpcready < Formula
     if OS.mac?
       # lib.install "libexec/rvm.app"
       # lib.install "libexec/CPCemuMacOS.app"
-
-        system "mkdir","-p","#{ENV['HOME']}/.CPCReady/"
-        system "cp", "-r", "libexec/rvm.app", "#{ENV['HOME']}/.CPCReady/"
-
-
+      system "mkdir","-p","#{ENV['HOME']}/.CPCReady/"
+      system "cp", "-r", "libexec/rvm.app", "#{ENV['HOME']}/.CPCReady/"
     end
 
     # Instala cpcemu solo en Linux
