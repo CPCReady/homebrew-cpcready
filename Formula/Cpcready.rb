@@ -4,8 +4,8 @@ class Cpcready < Formula
   url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
   sha256 "3702c8477e7212b49c221ae6cfe6ac237fa502d7e85ff6f9c8ea95a14139a77e"
 
-  # Definir la versión del archivo .whl
-  console_whl_version = "1.0.0"
+
+
 
   depends_on "dos2unix"
   depends_on "jq"
@@ -31,8 +31,8 @@ class Cpcready < Formula
 
     # Instala el archivo .whl solo si la versión de Python es igual o superior a 3.9
     if python_version && Gem::Version.new(python_version) >= Gem::Version.new("3.9")
-      libexec.install "console-#{console_whl_version}-py3-none-any.whl"
-      system "pip3", "install", libexec/"console-#{console_whl_version}-py3-none-any.whl"
+      libexec.install "console-1.0.0-py3-none-any.whl"
+      system "pip3", "install", libexec/"console-1.0.0-py3-none-any.whl"
     end
 
   end
