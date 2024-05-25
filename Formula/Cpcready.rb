@@ -20,23 +20,17 @@ class Cpcready < Formula
     if OS.mac?
       # lib.install "libexec/rvm.app"
       # lib.install "libexec/CPCemuMacOS.app"
-      system "cp", "-r", "libexec/rvm.app", "#{ENV['HOME']}/.CPCReady/"
+
+        system "mkdir","-p","#{ENV['HOME']}/.CPCReady/"
+        system "cp", "-r", "libexec/rvm.app", "#{ENV['HOME']}/.CPCReady/"
+
+
     end
 
     # Instala cpcemu solo en Linux
     if OS.linux?
       lib.install "libexec/cpcemu"
     end
-    # Obtiene la versión de Python instalada en el sistema
-    python_version = Utils.popen_read("python3 --version").chomp[/\d+\.\d+/]
-
-    # Instala el archivo .whl solo si la versión de Python es igual o superior a 3.9
-    if python_version && Gem::Version.new(python_version) >= Gem::Version.new("3.9")
-      libexec.install "libexec/console-1.0.0-py3-none-any.whl"
-      system "pip3", "install", libexec/"console-1.0.0-py3-none-any.whl"
-    end
-
-  end
 
   test do
     # Verifica que los ejecutables se instalaron correctamente
