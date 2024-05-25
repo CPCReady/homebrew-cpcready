@@ -1,0 +1,1 @@
+brew untap CPCReady/cpcready && brew tap CPCReady/cpcready && brew install cpcready

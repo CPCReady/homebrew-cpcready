@@ -2,19 +2,64 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-  sha256 "b2157044787f3dff02a7d0a06a43ecde84fdb0f28b34d38cc33f736193fcb8bc"
+  sha256 "3702c8477e7212b49c221ae6cfe6ac237fa502d7e85ff6f9c8ea95a14139a77e"
+
+  # Definir la versión del archivo .whl
+  console_whl_version = "1.0.0"
+
+  depends_on "dos2unix"
+  depends_on "jq"
+
+  def install
+    # Instala los archivos binarios en el directorio 'bin'
+    # bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console-amstrad", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/iDSK","bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
+    bin.install Dir["bin/*"]
+    share.install "share/VERSION"
+
+    # Instala solo en oscx
+    if OS.mac?
+      libexec.install "rvm.app"
+      libexec.install "CPCemuMacOS.app"
+    end
+
+    # Instala cpcemu solo en Linux
+    if OS.linux?
+      libexec.install "cpcemu"
+    end
+    # Obtiene la versión de Python instalada en el sistema
+    python_version = Utils.popen_read("python3 --version").chomp[/\d+\.\d+/]
+
+    # Instala el archivo .whl solo si la versión de Python es igual o superior a 3.9
+    if python_version && Gem::Version.new(python_version) >= Gem::Version.new("3.9")
+      libexec.install "console-#{console_whl_version}-py3-none-any.whl"
+      system "pip3", "install", libexec/"console-#{console_whl_version}-py3-none-any.whl"
+    end
+
+  end
+
+  test do
+    # Verifica que los ejecutables se instalaron correctamente
+    assert_equal "1.0.1", shell_output("#{bin}/about --version").strip
+
+    # Verifica que el archivo 'VERSION' se puede leer desde el directorio 'share'
+    assert_predicate share/"VERSION", :exist?
+
+    # Verifica que el directorio 'rvm.app' se haya instalado en libexec en macOS
+    if OS.mac?
+      assert_predicate libexec/"rvm.app", :exist?
+    end
+
+    # Verifica que el directorio 'cpcemu' se haya instalado en libexec en Linux
+    if OS.linux?
+      assert_predicate libexec/"cpcemu", :exist?
+    end
+  end
+end
 
   # resource "python_wheel" do
   #   url "https://example.com/python_wheel.whl"
   #   sha256 "sha256-del-archivo.whl"
   # end
-
-  def install
-    # Instala los archivos binarios en el directorio 'bin'
-    bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
-
-    # Instala los archivos de datos en el directorio 'share'
-    share.install "VERSION"
 
     # # Verifica si la versión de Python es 3.10 o superior
     # python_version = Utils.safe_popen_read("python3", "--version").chomp
@@ -26,16 +71,6 @@ class Cpcready < Formula
     # else
     #   opoo "Python 3.10 or newer is required to install this package. Skipping installation of Python Wheel."
     # end
-  end
-
-  test do
-    # Verifica que los ejecutables se instalaron correctamente
-    assert_equal "1.0.1", shell_output("#{bin}/about --version").strip
-
-    # Verifica que el archivo 'VERSION' se puede leer desde el directorio 'share'
-    assert_predicate share/"VERSION", :exist?
-  end
-end
 
 
 # class Cpcready < Formula
