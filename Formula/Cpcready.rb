@@ -31,7 +31,7 @@ class Cpcready < Formula
 
     # Instala el archivo .whl solo si la versión de Python es igual o superior a 3.9
     if python_version && Gem::Version.new(python_version) >= Gem::Version.new("3.9")
-      libexec.install "console-1.0.0-py3-none-any.whl"
+      libexec.install "libexec/console-1.0.0-py3-none-any.whl"
       system "pip3", "install", libexec/"console-1.0.0-py3-none-any.whl"
     end
 
