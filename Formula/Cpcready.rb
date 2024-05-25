@@ -16,15 +16,9 @@ class Cpcready < Formula
     # Instala solo en oscx
     if OS.mac?
       bin.mkpath
-      # mkdir_p share/"CPCReady"
-      # mv "share/rvm.app", share/"CPCReady/rvm.app"
-      # mv "share/CPCemuMacOS.app", share/"CPCReady/CPCemuMacOS.app"
-      install_dir = File.expand_path("~/CPCReady")
-
-      # Crea la carpeta si no existe
-      mkdir_p install_dir
-      mv "share/rvm.app", "~/CPCReady/rvm.app"
-      mv "share/CPCemuMacOS.app", "~/CPCReady/CPCemuMacOS.app"
+      mkdir_p share/"CPCReady"
+      mv "share/rvm.app", share/"CPCReady/rvm.app"
+      mv "share/CPCemuMacOS.app", share/"CPCReady/CPCemuMacOS.app"
     end
 
     # Instala cpcemu solo en Linux
