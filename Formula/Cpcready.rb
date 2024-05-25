@@ -2,10 +2,7 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-  sha256 "3702c8477e7212b49c221ae6cfe6ac237fa502d7e85ff6f9c8ea95a14139a77e"
-
-
-
+  sha256 "58af340402f5f48bf590906f5ce1d3f84e6621e6d316c6e1fa63631f98b8d5e5"
 
   depends_on "dos2unix"
   depends_on "jq"
@@ -15,52 +12,26 @@ class Cpcready < Formula
     # bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console-amstrad", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/iDSK","bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
     bin.install Dir["bin/*"]
     share.install "share/VERSION"
-    lib.install "libexec/library.sh"
+    lib.install "lib/library.sh"
     # Instala solo en oscx
     if OS.mac?
-      # lib.install "libexec/rvm.app"
-      # lib.install "libexec/CPCemuMacOS.app"
-      # app "libexec/rvm.app", target: "cpcready-rvm.app"
-      # system "mkdir","-p","#{ENV['HOME']}/.CPCReady/"
-      # system "cp", "-r", "libexec/rvm.app", "#{ENV['HOME']}/.CPCReady/"
       bin.mkpath
-      # A custom directory?
       mkdir_p share/"CPCReady"
-      # And then move something from the buildpath to that directory?
-      mv "libexec/rvm.app", share/"CPCReady/rvm.app"
+      mv "share/rvm.app", share/"cpcready/rvm.app"
+      mv "share/CPCemuMacOS.app", share/"cpcready/CPCemuMacOS.app"
     end
 
     # Instala cpcemu solo en Linux
     if OS.linux?
-      lib.install "libexec/cpcemu"
+      lib.install "share/cpcemu"
     end
-    # Obtiene la versión de Python instalada en el sistema
-    # python_version = Utils.popen_read("python3 --version").chomp[/\d+\.\d+/]
-
-    # # Instala el archivo .whl solo si la versión de Python es igual o superior a 3.9
-    # if python_version && Gem::Version.new(python_version) >= Gem::Version.new("3.9")
-    #   libexec.install "libexec/console-1.0.0-py3-none-any.whl"
-    #   system "pip3", "install", libexec/"console-1.0.0-py3-none-any.whl"
-    # end
-
   end
 
   test do
     # Verifica que los ejecutables se instalaron correctamente
     assert_equal "1.0.1", shell_output("#{bin}/about --version").strip
-
     # Verifica que el archivo 'VERSION' se puede leer desde el directorio 'share'
     assert_predicate share/"VERSION", :exist?
-
-    # Verifica que el directorio 'rvm.app' se haya instalado en libexec en macOS
-    if OS.mac?
-      assert_predicate libexec/"rvm.app", :exist?
-    end
-
-    # Verifica que el directorio 'cpcemu' se haya instalado en libexec en Linux
-    if OS.linux?
-      assert_predicate libexec/"cpcemu", :exist?
-    end
   end
 end
 
