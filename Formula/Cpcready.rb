@@ -2,7 +2,7 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-  sha256 "58af340402f5f48bf590906f5ce1d3f84e6621e6d316c6e1fa63631f98b8d5e5"
+  sha256 "e44c37d8abed807033aa6be12456428608c78c29279eb21fd5846b83f3ab545e"
 
   depends_on "dos2unix"
   depends_on "jq"
