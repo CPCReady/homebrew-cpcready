@@ -18,13 +18,13 @@ class Cpcready < Formula
 
     # Instala solo en oscx
     if OS.mac?
-      libexec.install "rvm.app"
-      libexec.install "CPCemuMacOS.app"
+      libexec.install "libexec/rvm.app"
+      libexec.install "ibexec/CPCemuMacOS.app"
     end
 
     # Instala cpcemu solo en Linux
     if OS.linux?
-      libexec.install "cpcemu"
+      libexec.install "ibexec/cpcemu"
     end
     # Obtiene la versión de Python instalada en el sistema
     python_version = Utils.popen_read("python3 --version").chomp[/\d+\.\d+/]
