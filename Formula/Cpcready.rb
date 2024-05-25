@@ -19,7 +19,7 @@ class Cpcready < Formula
     # Instala solo en oscx
     if OS.mac?
       libexec.install "libexec/rvm.app"
-      libexec.install "ibexec/CPCemuMacOS.app"
+      libexec.install "libexec/CPCemuMacOS.app"
     end
 
     # Instala cpcemu solo en Linux
