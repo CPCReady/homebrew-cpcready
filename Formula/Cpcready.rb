@@ -15,7 +15,7 @@ class Cpcready < Formula
     # bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console-amstrad", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/iDSK","bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
     bin.install Dir["bin/*"]
     share.install "share/VERSION"
-
+    libexec.install "libexec/library.sh"
     # Instala solo en oscx
     if OS.mac?
       libexec.install "libexec/rvm.app"
