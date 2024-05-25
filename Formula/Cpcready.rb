@@ -15,23 +15,23 @@ class Cpcready < Formula
     # bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console-amstrad", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/iDSK","bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
     bin.install Dir["bin/*"]
     share.install "share/VERSION"
-    libexec.install "libexec/library.sh"
+    lib.install "libexec/library.sh"
     # Instala solo en oscx
     if OS.mac?
-      libexec.install "libexec/rvm.app"
-      libexec.install "libexec/CPCemuMacOS.app"
+      lib.install "libexec/rvm.app"
+      lib.install "libexec/CPCemuMacOS.app"
     end
 
     # Instala cpcemu solo en Linux
     if OS.linux?
-      libexec.install "ibexec/cpcemu"
+      lib.install "ibexec/cpcemu"
     end
     # Obtiene la versión de Python instalada en el sistema
     python_version = Utils.popen_read("python3 --version").chomp[/\d+\.\d+/]
 
     # Instala el archivo .whl solo si la versión de Python es igual o superior a 3.9
     if python_version && Gem::Version.new(python_version) >= Gem::Version.new("3.9")
-      libexec.install "libexec/console-1.0.0-py3-none-any.whl"
+      lib.install "libexec/console-1.0.0-py3-none-any.whl"
       system "pip3", "install", libexec/"console-1.0.0-py3-none-any.whl"
     end
 
