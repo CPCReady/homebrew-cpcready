@@ -35,7 +35,7 @@ class Cpcready < Formula
   def install
     bin.install "bin/about", "bin/cls", "bin/amsdos", "bin/disc", "bin/emulator", "bin/lcat", "bin/mode", "bin/model", "bin/new", "bin/run", "bin/save"
     # bin.install Dir["bin/*"]
-    share.install "share/CPCReady/VERSION"
+    share.install "share/VERSION"
     lib.install "lib/cpcLib.sh"
 
     if OS.mac?
