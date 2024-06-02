@@ -1,30 +1,72 @@
 class Cpcready < Formula
+  include Language::Python::Virtualenv
+  version "1.0.0"
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
-  url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-  sha256 "e44c37d8abed807033aa6be12456428608c78c29279eb21fd5846b83f3ab545e"
+  url "https://github.com/CPCReady/sdk/releases/download/#{version}/CPCReady-#{version}.tar.gz"
+  sha256 "308f47ac9fb8fb23d00e830f23ef3e8141ac1c7fcf54c67eb0417c1aceb48999"
+
+  resource "cpcemu_mac" do
+    url "https://cpc-emu.org/Release/2022-08-13/CPCemuMacOS.app-2.5.zip"
+    sha256 "794d815c13c66c212fb9dbe627e6bffd723d4a83c04ca786fd728406a8e7bf1d" 
+  end
+  resource "rvm_mac" do
+    url "https://static.retrovm.org/release/beta1/macos/RetroVirtualMachine.2.0.beta-1.r7.macos.dmg"
+    sha256 "75e94f2df589ead3fb1eab529713312a17dc16e6b2ba547594cd9d5975def566" 
+  end
+  resource "cpcemu_linux" do
+    url "https://cpc-emu.org/Release/2022-08-13/cpcemu-linux-x86_64-2.5.tar.gz"
+    sha256 "5d8d2cb53f4fbc95f607787fdb417b074c04fe04600f0107829798f4234d9f1c" 
+  end
+  resource "rvm_linux" do
+    url "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
+    sha256 "7ac5f0c5e668088869ef2a229b22051714ef4a3b108b263e40298f8a3e27aad5" 
+  end
+
+  resource "amsdospy" do
+    url "https://github.com/CPCReady/amsdospy/releases/download/1.0.0/amsdospy-1.0.0.tar.gz"
+    sha256 "aabe560fb5e54f7890c657877c461c4dde473073a7fc06a271a339a5d3167a82" 
+  end
 
   depends_on "dos2unix"
   depends_on "jq"
+  depends_on "python@3.12"
 
   def install
-    # Instala los archivos binarios en el directorio 'bin'
-    # bin.install "bin/about", "bin/cls", "bin/configuration", "bin/console-amstrad", "bin/cpc", "bin/dir", "bin/disc", "bin/emulator", "bin/iDSK","bin/lcat", "bin/mode", "bin/new", "bin/run", "bin/save"
-    bin.install Dir["bin/*"]
-    share.install "share/VERSION"
-    lib.install "lib/library.sh"
-    # Instala solo en oscx
+    bin.install "bin/about", "bin/cls", "bin/amsdos", "bin/disc", "bin/emulator", "bin/lcat", "bin/mode", "bin/model", "bin/new", "bin/run", "bin/save"
+    # bin.install Dir["bin/*"]
+    share.install "share/CPCReady/VERSION"
+    lib.install "lib/cpcLib.sh"
+
     if OS.mac?
-      bin.mkpath
-      mkdir_p share/"CPCReady"
-      mv "share/rvm.app", share/"CPCReady/rvm.app"
-      mv "share/CPCemuMacOS.app", share/"CPCReady/CPCemuMacOS.app"
+      bin.install "bin/cat2cpc/bin/cat2cpc-osx-universal" => "cat2cpc"
+      bin.install "bin/cpc-config/bin/cpc-config-osx-universal" => "cpc-config"
+      bin.install "bin/iDSK+/bin/iDSK-macos-latest/iDSK" => "iDSK"
+      share.install "Emuladores/RetroVirtualMachine.app"
+      resource("cpcemu_mac").stage do
+        (share/"CPCemuMacOS.app").install Dir["*"]
+      end
     end
 
-    # Instala cpcemu solo en Linux
     if OS.linux?
-      lib.install "share/cpcemu"
+      bin.install "bin/cat2cpc/bin/cat2cpc-linux-x86_64" => "cat2cpc"
+      bin.install "bin/cpc-config/bin/cpc-config-linux-x86_64" => "cpc-config"
+      bin.install "bin/iDSK+/bin/iDSK-ubuntu-latest/iDSK" => "iDSK"
+
+      resource("cpcemu_linux").stage do
+        (share/"cpcemu").install Dir["*"]
+      end
+
+      resource("rvm_linux").stage do
+        (share).install Dir["*"]
+      end
     end
+
+    # Instala el módulo Python amsdospy
+    venv = virtualenv_create(libexec, "python3.12")
+    venv.pip_install resource("amsdospy")
+    bin.install_symlink libexec/"bin/amsdospy"
+
   end
 
   test do
@@ -34,100 +76,3 @@ class Cpcready < Formula
     assert_predicate share/"VERSION", :exist?
   end
 end
-
-  # resource "python_wheel" do
-  #   url "https://example.com/python_wheel.whl"
-  #   sha256 "sha256-del-archivo.whl"
-  # end
-
-    # # Verifica si la versión de Python es 3.10 o superior
-    # python_version = Utils.safe_popen_read("python3", "--version").chomp
-    # if python_version.start_with?("Python 3.10", "Python 3.11")
-    #   # Instala el archivo Wheel de Python en el directorio 'libexec'
-    #   libexec.install resource("python_wheel")
-    #   # Instala el archivo Wheel en el entorno del sistema
-    #   system "python3", "-m", "pip", "install", libexec/"python_wheel.whl"
-    # else
-    #   opoo "Python 3.10 or newer is required to install this package. Skipping installation of Python Wheel."
-    # end
-
-
-# class Cpcready < Formula
-#     desc "My CPCReady software"
-#     homepage "https://github.com/CPCReady/sdk"
-#     version "1.0.0"
-#     url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-#     sha256 "7e006dd18d7e987a2959f0c21546b6208c312a2f56c20086bfc3ccc3332aa553"
-  
-#     def install
-#       # Crear el directorio /opt/CPCReady
-#       opt_prefix = "/opt/CPCReady"
-#       (opt_prefix).install Dir["*"]
-  
-#       # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
-#       bin.install_symlink Dir["#{opt_prefix}/bin/*"]
-#     end
-  
-#     test do
-#       # Comprobar que el software se instaló correctamente y puede ejecutarse
-#       assert_predicate opt_prefix/"bin/about", :exist?
-#       assert_match "expected_output", shell_output("#{bin}/about --version")
-#     end
-#   end
-
-# class Cpcready < Formula
-#     desc "CPCReady SDK"
-#     homepage "https://github.com/CPCReady/sdk"
-#     # version "1.0.1"
-#     url "https://github.com/CPCReady/sdk/releases/download/v1.0.1/CPCReady.tar.gz"
-#     sha256 "9744e959095cb4fb329109eab67000ca73d4040c914017953e73376153fceb1b"
-  
-#     def install
-#       # Crear el directorio /opt/CPCReady si no existe
-
-#       # bash_shellenv.install <<-SHELL
-#       # export SDKMAN_DIR="$HOME/.sdkman"
-#       # . "$HOME/.sdkman/bin/sdkman-init.sh"
-#       # SHELL
-#       # zsh_shellenv.install <<-SHELL
-#       #     export SDKMAN_DIR="$HOME/.sdkman"
-#       #     . "$HOME/.sdkman/bin/sdkman-init.sh"
-#       # SHELL
-#       # on_linux do
-#       #   depends_on "util-linux"
-#       # end
-#     #   install_dir = File.expand_path("~/CPCReady")
-
-#     #   # Crea la carpeta si no existe
-#     #   mkdir_p install_dir
-  
-#     #   # Copia todos los archivos a la carpeta de instalación
-#     # # Copia todos los archivos a la carpeta de instalación
-#     #   cp_r Dir["*"], install_dir
-#             # uses_from_macos "jq"
-#       # uses_from_macos "dos2unix"
-#       # opt_prefix = Pathname.new("$HOME/CPCReady")
-#       # opt_prefix.mkpath
-#       bin.install "cls"
-#       bin.install "console"
-#       bin.install "about"
-#       bin.install "configuration"
-#       share.install "cpc"
-#       # # Copiar todos los archivos al directorio /opt/CPCReady
-#       # opt_prefix.install Dir["*"]
-  
-#       # # Crear enlaces simbólicos en /usr/local/bin para cada ejecutable en /opt/CPCReady/bin
-#       # (opt_prefix/"bin").each_child do |executable|
-#       #   bin.install_symlink executable
-#       # end
-#       # bin.install_symlink Dir["#{install_dir}/bin/*"]
-#     end
-  
-#     test do
-#       # Comprobar que el software se instaló correctamente y puede ejecutarse
-#       system "#{bin}/about", "--version"
-#       # assert_predicate "/opt/CPCReady/bin/about", :exist?
-#       # assert_match "expected_output", shell_output("#{bin}/about --version")
-#     end
-#   end
-  
