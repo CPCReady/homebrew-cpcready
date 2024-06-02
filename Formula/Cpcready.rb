@@ -67,6 +67,7 @@ class Cpcready < Formula
     venv.pip_install resource("amsdospy")
     bin.install_symlink libexec/"bin/amsdospy"
 
+    bin.children.each { |file| chmod 0777, file }
   end
 
   test do
