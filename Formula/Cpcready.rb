@@ -39,8 +39,8 @@ class Cpcready < Formula
     lib.install "lib/cpcLib.sh"
 
     if OS.mac?
-      bin.install "bin/cat2cpc/bin/cat2cpc-osx-universal" => "cat2cpc"
-      bin.install "bin/cpc-config/bin/cpc-config-osx-universal" => "cpc-config"
+      bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
+      bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-macos-latest/iDSK" => "iDSK"
       share.install "Emuladores/RetroVirtualMachine2.app"
       resource("cpcemu_mac").stage do
