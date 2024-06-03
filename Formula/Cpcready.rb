@@ -25,7 +25,7 @@ class Cpcready < Formula
 
   resource "amsdospy" do
     url "https://github.com/CPCReady/amsdospy/releases/download/1.0.0/amsdospy-1.0.0.tar.gz"
-    sha256 "50041a696ff04753f97168b846d3adb7e826c43741ed18483d7f75d727921137" 
+    sha256 "aabe560fb5e54f7890c657877c461c4dde473073a7fc06a271a339a5d3167a82" 
   end
 
   depends_on "dos2unix"
