@@ -4,7 +4,7 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/#{version}/CPCReady-#{version}.tar.gz"
-  sha256 "308f47ac9fb8fb23d00e830f23ef3e8141ac1c7fcf54c67eb0417c1aceb48999"
+  sha256 "6e7d471c69c6b57042c1d70fb551f3a68f5570a62629a94210355927f735db02"
 
   resource "cpcemu_mac" do
     url "https://cpc-emu.org/Release/2022-08-13/CPCemuMacOS.app-2.5.zip"
@@ -25,7 +25,7 @@ class Cpcready < Formula
 
   resource "amsdospy" do
     url "https://github.com/CPCReady/amsdospy/releases/download/1.0.0/amsdospy-1.0.0.tar.gz"
-    sha256 "aabe560fb5e54f7890c657877c461c4dde473073a7fc06a271a339a5d3167a82" 
+    sha256 "50041a696ff04753f97168b846d3adb7e826c43741ed18483d7f75d727921137" 
   end
 
   depends_on "dos2unix"
@@ -42,7 +42,7 @@ class Cpcready < Formula
       bin.install "bin/cat2cpc/bin/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/bin/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-macos-latest/iDSK" => "iDSK"
-      share.install "Emuladores/RetroVirtualMachine.app"
+      share.install "Emuladores/RetroVirtualMachine2.app"
       resource("cpcemu_mac").stage do
         (share/"CPCemuMacOS.app").install Dir["*"]
       end
