@@ -31,6 +31,7 @@ class Cpcready < Formula
   depends_on "dos2unix"
   depends_on "jq"
   depends_on "python@3.12"
+  depends_on "python-prompt-toolkit"
 
   def install
     bin.install "bin/about", "bin/cls", "bin/amsdos", "bin/disc", "bin/emulator", "bin/lcat", "bin/mode", "bin/model", "bin/new", "bin/run", "bin/save"
