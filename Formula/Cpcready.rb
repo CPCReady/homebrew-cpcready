@@ -54,13 +54,13 @@ class Cpcready < Formula
       bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-osx-universal" => "iDSK"
-
+      system "mkdir", "~/.CPCReady"
       # # bin.install "Emuladores/CPCemuMacOS.app"
       # resource("cpcemu_mac").stage do
       #   (bin/"CPCemuMacOS.app").install Dir["*"]
       # end
-      home_cpc_ready = Pathname.new(Dir.home).join(".pepepe")
-      home_cpc_ready.mkpath
+      # home_cpc_ready = Pathname.new(Dir.home).join(".pepepe")
+      # home_cpc_ready.mkpath
 
   
       # Copiar un archivo específico a la carpeta creada en el home del usuario
