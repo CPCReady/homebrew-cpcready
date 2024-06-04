@@ -19,14 +19,6 @@ class Cpcready < Formula
     url "https://static.retrovm.org/release/beta1/macos/RetroVirtualMachine.2.0.beta-1.r7.macos.dmg"
     sha256 "75e94f2df589ead3fb1eab529713312a17dc16e6b2ba547594cd9d5975def566" 
   end
-  resource "cpcemu_linux" do
-    url "https://cpc-emu.org/Release/2022-08-13/cpcemu-linux-x86_64-2.5.tar.gz"
-    sha256 "5d8d2cb53f4fbc95f607787fdb417b074c04fe04600f0107829798f4234d9f1c" 
-  end
-  resource "rvm_linux" do
-    url "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
-    sha256 "7ac5f0c5e668088869ef2a229b22051714ef4a3b108b263e40298f8a3e27aad5" 
-  end
 
   resource "prompt-toolkit" do
     url "https://files.pythonhosted.org/packages/66/10/60dfbae0c000879066656fc15bb8d0d1d4235ead415959defcbeb57ee060/prompt_toolkit-3.0.45.tar.gz"
@@ -62,25 +54,25 @@ class Cpcready < Formula
       bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-osx-universal" => "iDSK"
-      bin.install "Emuladores/RetroVirtualMachine2.app"
-      # bin.install "Emuladores/CPCemuMacOS.app"
-      resource("cpcemu_mac").stage do
-        (bin/"CPCemuMacOS.app").install Dir["*"]
-      end
+
+      # # bin.install "Emuladores/CPCemuMacOS.app"
+      # resource("cpcemu_mac").stage do
+      #   (bin/"CPCemuMacOS.app").install Dir["*"]
+      # end
+      # home_cpc_ready = Pathname.new(Dir.home).join(".pepepe")
+      # home_cpc_ready.mkpath
+
+  
+      # Copiar un archivo específico a la carpeta creada en el home del usuario
+      # (home_cpc_ready).install "share/VERSION"
     end
 
     if OS.linux?
       bin.install "bin/cat2cpc/bin/cat2cpc-linux-x86_64" => "cat2cpc"
       bin.install "bin/cpc-config/bin/cpc-config-linux-x86_64" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-ubuntu-latest/iDSK" => "iDSK"
-
-      resource("cpcemu_linux").stage do
-        (bin/"cpcemu").install Dir["*"]
-      end
-
-      resource("rvm_linux").stage do
-        (bin).install Dir["*"]
-      end
+      bin.install "Emuladores/cpcemu"
+      bin.install "Emuladores/RetroVirtualMachine"
     end
 
     # Instala el módulo Python amsdospy
@@ -95,6 +87,16 @@ class Cpcready < Formula
     bin.children.each { |file| chmod 0777, file }
   end
 
+  post_install do
+    # Crear una carpeta en el home del usuario
+    home_cpc_ready = Pathname.new(Dir.home).join(".CPCReady")
+    home_cpc_ready.mkpath
+
+    # Copiar un archivo específico a la carpeta creada en el home del usuario
+    (home_cpc_ready/"your_file").write <<~EOS
+      contenido del archivo que quieras escribir o un comando para copiar un archivo
+    EOS
+  end
   test do
     # Verifica que los ejecutables se instalaron correctamente
     assert_equal "1.0.1", shell_output("#{bin}/about --version").strip
