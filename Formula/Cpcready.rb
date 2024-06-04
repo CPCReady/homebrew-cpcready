@@ -4,11 +4,11 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/#{version}/CPCReady-#{version}.tar.gz"
-  sha256 "e01bba55d224425cc910a84cf0c0ea34b216e224bcc08facf20a1afbdf6b2d22"
+  sha256 "6f1334396427dbb7c822a5e117bdafcdc4ca56e7dd07b47d7c281f759c0ca938"
 
   resource "amsdospy" do
     url "https://github.com/CPCReady/amsdospy/releases/download/1.0.0/amsdospy-1.0.0.tar.gz"
-    sha256 "3a3a311833ef301d292c0f071d3bfb3ae1cd095250289d857f96cff03e046f33" 
+    sha256 "ca030112241dbd03f26c8e56a6a12f624634bee906ce85f5aa5f459685a78f65" 
   end
 
   resource "cpcemu_mac" do
