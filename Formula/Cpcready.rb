@@ -64,7 +64,7 @@ class Cpcready < Formula
 
   
       # Copiar un archivo específico a la carpeta creada en el home del usuario
-      (home_cpc_ready).install "share/VERSION"
+      # (home_cpc_ready).install "share/VERSION"
     end
 
     if OS.linux?
