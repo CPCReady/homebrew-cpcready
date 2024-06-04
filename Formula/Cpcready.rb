@@ -4,7 +4,12 @@ class Cpcready < Formula
   desc "CPCReady SDK"
   homepage "https://github.com/CPCReady/sdk"
   url "https://github.com/CPCReady/sdk/releases/download/#{version}/CPCReady-#{version}.tar.gz"
-  sha256 "6e7d471c69c6b57042c1d70fb551f3a68f5570a62629a94210355927f735db02"
+  sha256 "e01bba55d224425cc910a84cf0c0ea34b216e224bcc08facf20a1afbdf6b2d22"
+
+  resource "amsdospy" do
+    url "https://github.com/CPCReady/amsdospy/releases/download/1.0.0/amsdospy-1.0.0.tar.gz"
+    sha256 "3a3a311833ef301d292c0f071d3bfb3ae1cd095250289d857f96cff03e046f33" 
+  end
 
   resource "cpcemu_mac" do
     url "https://cpc-emu.org/Release/2022-08-13/CPCemuMacOS.app-2.5.zip"
@@ -21,11 +26,6 @@ class Cpcready < Formula
   resource "rvm_linux" do
     url "https://static.retrovm.org/release/beta1/linux/x64/RetroVirtualMachine.2.0.beta-1.r7.linux.x64.zip"
     sha256 "7ac5f0c5e668088869ef2a229b22051714ef4a3b108b263e40298f8a3e27aad5" 
-  end
-
-  resource "amsdospy" do
-    url "https://github.com/CPCReady/amsdospy/releases/download/1.0.0/amsdospy-1.0.0.tar.gz"
-    sha256 "aabe560fb5e54f7890c657877c461c4dde473073a7fc06a271a339a5d3167a82" 
   end
 
   resource "prompt-toolkit" do
@@ -61,7 +61,7 @@ class Cpcready < Formula
     if OS.mac?
       bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
-      bin.install "bin/iDSK+/bin/iDSK-macos-latest/iDSK" => "iDSK"
+      bin.install "bin/iDSK+/bin/iDSK-osx-universal" => "iDSK"
       share.install "Emuladores/RetroVirtualMachine2.app"
       resource("cpcemu_mac").stage do
         (share/"CPCemuMacOS.app").install Dir["*"]
