@@ -62,9 +62,10 @@ class Cpcready < Formula
       bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-osx-universal" => "iDSK"
-      app "Emuladores/RetroVirtualMachine2.app", "/Applications/RetroVirtualMachine22.app"
+      bin.install "Emuladores/RetroVirtualMachine2.app"
+      # bin.install "Emuladores/CPCemuMacOS.app"
       resource("cpcemu_mac").stage do
-        (share/"CPCemuMacOS.app").install Dir["*"]
+        (bin/"CPCemuMacOS.app").install Dir["*"]
       end
     end
 
@@ -74,11 +75,11 @@ class Cpcready < Formula
       bin.install "bin/iDSK+/bin/iDSK-ubuntu-latest/iDSK" => "iDSK"
 
       resource("cpcemu_linux").stage do
-        (share/"cpcemu").install Dir["*"]
+        (bin/"cpcemu").install Dir["*"]
       end
 
       resource("rvm_linux").stage do
-        (share).install Dir["*"]
+        (bin).install Dir["*"]
       end
     end
 
