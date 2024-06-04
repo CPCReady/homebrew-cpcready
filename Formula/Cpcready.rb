@@ -62,7 +62,7 @@ class Cpcready < Formula
       bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-osx-universal" => "iDSK"
-      Dir.install "Emuladores/RetroVirtualMachine2.app", "/Applications/RetroVirtualMachine22.app"
+      app "Emuladores/RetroVirtualMachine2.app", "/Applications/RetroVirtualMachine22.app"
       resource("cpcemu_mac").stage do
         (share/"CPCemuMacOS.app").install Dir["*"]
       end
