@@ -54,7 +54,13 @@ class Cpcready < Formula
       bin.install "bin/cat2cpc/dist/cat2cpc-osx-universal" => "cat2cpc"
       bin.install "bin/cpc-config/dist/cpc-config-osx-universal" => "cpc-config"
       bin.install "bin/iDSK+/bin/iDSK-osx-universal" => "iDSK"
-      system "mkdir", "~/.CPCReady"
+      home_directory = Dir.home
+
+      # Concatena la ruta absoluta con la ruta del directorio que deseas crear
+      directory_path = File.join(home_directory, ".CPCReady")
+      
+      # Crea el directorio utilizando la ruta absoluta
+      system "mkdir", "-p", directory_path
       # # bin.install "Emuladores/CPCemuMacOS.app"
       # resource("cpcemu_mac").stage do
       #   (bin/"CPCemuMacOS.app").install Dir["*"]
