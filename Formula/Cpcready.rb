@@ -59,12 +59,12 @@ class Cpcready < Formula
       # resource("cpcemu_mac").stage do
       #   (bin/"CPCemuMacOS.app").install Dir["*"]
       # end
-      # home_cpc_ready = Pathname.new(Dir.home).join(".pepepe")
-      # home_cpc_ready.mkpath
+      home_cpc_ready = Pathname.new(Dir.home).join(".pepepe")
+      home_cpc_ready.mkpath
 
   
       # Copiar un archivo específico a la carpeta creada en el home del usuario
-      # (home_cpc_ready).install "share/VERSION"
+      (home_cpc_ready).install "share/VERSION"
     end
 
     if OS.linux?
@@ -87,16 +87,16 @@ class Cpcready < Formula
     bin.children.each { |file| chmod 0777, file }
   end
 
-  post_install do
-    # Crear una carpeta en el home del usuario
-    home_cpc_ready = Pathname.new(Dir.home).join(".CPCReady")
-    home_cpc_ready.mkpath
+  # post_install do
+  #   # Crear una carpeta en el home del usuario
+  #   home_cpc_ready = Pathname.new(Dir.home).join(".CPCReady")
+  #   home_cpc_ready.mkpath
 
-    # Copiar un archivo específico a la carpeta creada en el home del usuario
-    (home_cpc_ready/"your_file").write <<~EOS
-      contenido del archivo que quieras escribir o un comando para copiar un archivo
-    EOS
-  end
+  #   # Copiar un archivo específico a la carpeta creada en el home del usuario
+  #   (home_cpc_ready/"your_file").write <<~EOS
+  #     contenido del archivo que quieras escribir o un comando para copiar un archivo
+  #   EOS
+  # end
   test do
     # Verifica que los ejecutables se instalaron correctamente
     assert_equal "1.0.1", shell_output("#{bin}/about --version").strip
