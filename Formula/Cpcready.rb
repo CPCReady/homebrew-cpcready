@@ -60,7 +60,7 @@ class Cpcready < Formula
       directory_path = File.join(home_directory, ".CPCReady")
       
       # Crea el directorio utilizando la ruta absoluta
-      system "mkdir", "-p", directory_path
+      system "mkdir", "-p", "$HOME/asdfasdf"
       # # bin.install "Emuladores/CPCemuMacOS.app"
       # resource("cpcemu_mac").stage do
       #   (bin/"CPCemuMacOS.app").install Dir["*"]
