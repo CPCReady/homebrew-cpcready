@@ -1,14 +1,18 @@
 class Cpcready < Formula
   desc "Command-line interface (CLI) for programming Amstrad CPC in Visual Studio Code"
   homepage "https://github.com/CPCReady/software"
-  url "https://github.com/CPCReady/software/releases/download/0.1.0/CPCReady-0.1.0.tar.gz"
-  sha256 "862351ff020a82b68c66804a35ab979155d997b01591b686b1715f042146d172"
+  url "https://github.com/CPCReady/software/releases/download/0.1.1/CPCReady-0.1.1.tar.gz"
+  sha256 "2008993f28e34b0749b7fdb44698f5b1c719562f5becd6d5d9f5631085f57332"
   license "MIT"
   depends_on "dos2unix"
   depends_on "jq"
   depends_on "yq"
-
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
   def install
+    cd "bin/IDSK-PLUS"
+    system "make"
     bin.install "bin/cpc-about.sh"
     bin.install "bin/cpc"
     bin.install "bin/cpc-cls.sh"
