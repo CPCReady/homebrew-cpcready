@@ -23,6 +23,7 @@ class Cpcready < Formula
 
 
     # Instalar scripts y binarios
+    bin.install "IDSK-PLUS/bin/iDSK"
     bin.install "bin/cpc-about.sh"
     bin.install "bin/cpc"
     bin.install "bin/cpc-cls.sh"
