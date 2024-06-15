@@ -45,8 +45,8 @@ class Cpcready < Formula
     share.install "share/settings.j2"
 
     # Instalar iDSK dependiendo del SO
-    bin.install "bin/osx/iDSK" if OS.mac?
-    bin.install "bin/linux/iDSK" if OS.linux?
+    # bin.install "bin/osx/iDSK" if OS.mac?
+    # bin.install "bin/linux/iDSK" if OS.linux?
   end
 
   test do
