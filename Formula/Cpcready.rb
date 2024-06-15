@@ -16,6 +16,7 @@ class Cpcready < Formula
     # Ajusta la siguiente línea según la estructura real del tarball
     # Si bin/IDSK-PLUS no existe, elimina o actualiza esta sección
     cd "IDSK-PLUS" do
+        system "mkdir","bin"
         system "make","clean"
         system "make"
     end
