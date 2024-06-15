@@ -17,7 +17,7 @@ class Cpcready < Formula
     # Si bin/IDSK-PLUS no existe, elimina o actualiza esta sección
     if File.directory?("IDSK-PLUS")
       cd "IDSK-PLUS" do
-        system "make"
+        system "make","-v"
       end
     end
 
