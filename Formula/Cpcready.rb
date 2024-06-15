@@ -15,11 +15,11 @@ class Cpcready < Formula
   def install
     # Ajusta la siguiente línea según la estructura real del tarball
     # Si bin/IDSK-PLUS no existe, elimina o actualiza esta sección
-    if File.directory?("IDSK-PLUS")
-      cd "IDSK-PLUS" do
-        system "make","-v"
-      end
+    cd "IDSK-PLUS" do
+        system "make","clean"
+        system "make"
     end
+
 
     # Instalar scripts y binarios
     bin.install "bin/cpc-about.sh"
