@@ -13,17 +13,14 @@ class Cpcready < Formula
   depends_on "libtool" => :build
 
   def install
-    # Ajusta la siguiente línea según la estructura real del tarball
-    # Si bin/IDSK-PLUS no existe, elimina o actualiza esta sección
     cd "IDSK-PLUS" do
         system "mkdir","bin"
         system "make","clean"
         system "make"
     end
 
-
     # Instalar scripts y binarios
-    # bin.install "IDSK-PLUS/bin/iDSK"
+    bin.install "IDSK-PLUS/bin/iDSK"
     bin.install "bin/cpc-about.sh"
     bin.install "bin/cpc"
     bin.install "bin/cpc-cls.sh"
