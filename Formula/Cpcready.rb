@@ -1,8 +1,8 @@
 class Cpcready < Formula
   desc "Command-line interface (CLI) for programming Amstrad CPC in Visual Studio Code"
   homepage "https://github.com/CPCReady/software"
-  url "https://github.com/CPCReady/software/releases/download/0.1.1/CPCReady-0.1.1.tar.gz"
-  sha256 "2008993f28e34b0749b7fdb44698f5b1c719562f5becd6d5d9f5631085f57332"
+  url "https://github.com/CPCReady/software/releases/download/0.1.2/CPCReady-0.1.2.tar.gz"
+  sha256 "f0b8fd74e3f45676773b7bdc11234f02f430c583f9d590c7232e444d6fcbe0bd"
   license "MIT"
 
   depends_on "dos2unix"
@@ -15,8 +15,8 @@ class Cpcready < Formula
   def install
     # Ajusta la siguiente línea según la estructura real del tarball
     # Si bin/IDSK-PLUS no existe, elimina o actualiza esta sección
-    if File.directory?("bin/IDSK-PLUS")
-      cd "bin/IDSK-PLUS" do
+    if File.directory?("IDSK-PLUS")
+      cd "IDSK-PLUS" do
         system "make"
       end
     end
