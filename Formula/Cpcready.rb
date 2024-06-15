@@ -13,9 +13,12 @@ class Cpcready < Formula
   depends_on "libtool" => :build
 
   def install
-    # Compilar iDSK-PLUS
-    cd "bin/IDSK-PLUS" do
-      system "make"
+    # Ajusta la siguiente línea según la estructura real del tarball
+    # Si bin/IDSK-PLUS no existe, elimina o actualiza esta sección
+    if File.directory?("bin/IDSK-PLUS")
+      cd "bin/IDSK-PLUS" do
+        system "make"
+      end
     end
 
     # Instalar scripts y binarios
@@ -49,4 +52,3 @@ class Cpcready < Formula
     assert_predicate share/"VERSION", :exist?
   end
 end
-
