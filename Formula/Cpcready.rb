@@ -1,8 +1,8 @@
 class Cpcready < Formula
   desc "CPCReady - The command line interface (CLI) for programming Locomotive Basic for Amstrad in Visual Studio Code"
   homepage "https://github.com/CPCReady/software"
-  url "https://github.com/CPCReady/software/releases/download/0.1.0/CPCReady-0.1.0.tar.gz"
-  sha256 "c0fe72b069247e8cbdc5255bc76d74a1df42dff74c6088869ab2bec814b0b4d8"
+  url "https://github.com/CPCReady/software/releases/download/0.1.4/CPCReady-0.1.4.tar.gz"
+  sha256 "5a5368485bd016f410ee28b82838aebdec46473b60bc0826ca6989a83e9158f7"
   license "MIT"
 
   depends_on "dos2unix"
