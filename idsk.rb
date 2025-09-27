@@ -5,8 +5,11 @@ class Idsk < Formula
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/CPCReady/iDSK-CPCReady/releases/download/v1.0.0/iDSK-macos-arm64"
-      sha256 "ad51b0560d56442b972d8b00ed856f3647ba9f06976999b1ecdd00e1c2b9fdb3"
+      url "https://github.com/CPCReady/idsk/releases/download/v1.0.0/iDSK-mac-arm64.zip"
+      sha256 "80c7d18b8537ca60a769753499fe415b19ffab23459eba432233aa8558e7305d"
+    elsif Hardware::CPU.intel?
+      url "https://github.com/CPCReady/idsk/releases/download/v1.0.0/iDSK-mac-x86_64.zip"
+      sha256 "f69c5bed89576d98ba6e5d327efe12be3afa4e10f7d0dc719fe376d22adecf70"
     end
   end
 
