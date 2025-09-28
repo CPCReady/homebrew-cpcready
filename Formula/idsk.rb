@@ -1,7 +1,7 @@
 class Idsk < Formula
-  desc "Create virtual disk images for Amstrad CPC emulators"
-  homepage "https://github.com/CPCReady/idsk"
-  version "1.0.2"
+  desc "CPCReady Software"
+  homepage "https://github.com/CPCReady/homebrew-cpcready"
+  version "1.0.0"
 
   on_macos do
     if Hardware::CPU.arm?
