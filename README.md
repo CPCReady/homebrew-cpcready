@@ -4,4 +4,4 @@ Install iDSK using Homebrew:
 
 ```bash
 brew tap cpcready/cpcready
-brew install idsk
+brew install cpcready-tools
