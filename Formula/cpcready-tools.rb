@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.1"
+  version "1.0.2"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -31,6 +31,7 @@ class CpcreadyTools < Formula
   depends_on "gum"
   depends_on "yq"
   depends_on "jq"
+  depends_on "direnv"
 
   def install
     if OS.mac?
