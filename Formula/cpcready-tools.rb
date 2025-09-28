@@ -1,4 +1,4 @@
-class CpcReadyTools < Formula
+class CpcreadyTools < Formula
   desc "Instala un conjunto de herramientas CPCReady y algunas externas"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
 
