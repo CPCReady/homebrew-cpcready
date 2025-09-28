@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.0"
+  version "1.0.1"
 
   on_macos do
     if Hardware::CPU.arm?
