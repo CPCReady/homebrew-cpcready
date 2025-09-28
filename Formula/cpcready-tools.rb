@@ -23,6 +23,11 @@ class CpcreadyTools < Formula
     end
   end
 
+  resource "cpc-update-var" do
+    url "https://github.com/CPCReady/cpc-update-var/releases/download/v0.1.2/cpc-update-var"
+    sha256 "3293825eff99965331401a3c0ab23924eee2d44ecf73ab36e36102512545b2b4"
+  end
+
   depends_on "gum"
   depends_on "yq"
   depends_on "jq"
@@ -41,9 +46,13 @@ class CpcreadyTools < Formula
         bin.install "iDSK-linux-x86_64" => "idsk"
       end
     end
+    resource("cpc-update-var").stage do
+      bin.install "cpc-update-var"
+    end
   end
 
   test do
     system bin/"idsk", "--version"
+    system bin/"cpc-update-var", "--version"
   end
 end
