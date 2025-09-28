@@ -23,6 +23,10 @@ class Idsk < Formula
     end
   end
 
+  depends_on "gum"
+  depends_on "yq"
+  depends_on "jq"
+
   def install
     if OS.mac?
       if Hardware::CPU.arm?
