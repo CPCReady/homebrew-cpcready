@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.6"
+  version "1.0.7"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -29,8 +29,8 @@ class CpcreadyTools < Formula
   end
 
   resource "cpc-common.sh" do
-    url "https://github.com/CPCReady/cpc-common/releases/download/v0.0.1/cpc-common.sh"
-    sha256 "c7785f6b84be59c7af596f56cf1b8a9fb96e742497667c448b77e252335d4107"
+    url "https://github.com/CPCReady/cpc-common/releases/download/v0.0.2/cpc-common.sh"
+    sha256 "d255695ff41d47e904ca41b7c7743fe6858a0722a16c4a71321bc51ea8d45e82"
   end
 
   depends_on "gum"
