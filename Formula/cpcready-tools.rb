@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.2"
+  version "1.0.3"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -28,6 +28,11 @@ class CpcreadyTools < Formula
     sha256 "3293825eff99965331401a3c0ab23924eee2d44ecf73ab36e36102512545b2b4"
   end
 
+  resource "cpc-common.sh" do
+    url "https://github.com/CPCReady/cpc-common/releases/download/v0.0.1/cpc-common.sh"
+    sha256 "c7785f6b84be59c7af596f56cf1b8a9fb96e742497667c448b77e252335d4107"
+  end
+
   depends_on "gum"
   depends_on "yq"
   depends_on "jq"
@@ -51,6 +56,8 @@ class CpcreadyTools < Formula
       bin.install "cpc-update-var"
     end
   end
+
+  libexec.install "cpc-common.sh" => "cpc-common.sh"
 
   test do
     system bin/"idsk", "--version"
