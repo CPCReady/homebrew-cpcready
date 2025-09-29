@@ -55,10 +55,10 @@ class CpcreadyTools < Formula
     resource("cpc-update-var").stage do
       bin.install "cpc-update-var"
     end
-    libexec.install "cpc-common.sh" => "cpc-common.sh"
-    # resource("cpc-common.sh").stage do
-    #   (libexec/"cpc-common.sh").install "cpc-common.sh"
-    # end
+    # libexec.install "cpc-common.sh" => "cpc-common.sh"
+    resource("cpc-common.sh").stage do
+      (libexec/"cpc-common.sh").install "cpc-common.sh"
+    end
   end
 
   
