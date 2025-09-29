@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.7"
+  version "1.0.8"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -33,13 +33,19 @@ class CpcreadyTools < Formula
     sha256 "d255695ff41d47e904ca41b7c7743fe6858a0722a16c4a71321bc51ea8d45e82"
   end
 
+  resource "cpc-ini" do
+    url "https://github.com/CPCReady/cpc_ini/archive/refs/tags/0.0.1.tar.gz"
+    sha256 "3a040756bc225d7587dec88d7fe5c947f805d966b6e89d54f3f358de879e0505"
+  end
+
   depends_on "gum"
   depends_on "yq"
   depends_on "jq"
   depends_on "direnv"
+  depends_on "inih"
 
   def install
-    # Instalar el binario principal iDSK
+    # Instalar iDSK
     if OS.mac?
       if Hardware::CPU.arm?
         bin.install "iDSK-mac-arm64" => "idsk"
@@ -54,14 +60,21 @@ class CpcreadyTools < Formula
       end
     end
 
-    # Instalar el script cpc-update-var en bin
+    # Instalar cpc-update-var
     resource("cpc-update-var").stage do
       bin.install "cpc-update-var"
     end
 
-    # Instalar cpc-common.sh en libexec para ser usado vía source
+    # Instalar cpc-common.sh
     resource("cpc-common.sh").stage do
       libexec.install "cpc-common.sh"
+    end
+
+    # Compilar e instalar cpc_ini
+    resource("cpc-ini").stage do
+      system "gcc", "-I#{Formula["inih"].opt_include}", "-L#{Formula["inih"].opt_lib}",
+             "-o", "cpc_ini", "main.c", "-linih"
+      bin.install "cpc_ini"
     end
   end
 
@@ -69,5 +82,6 @@ class CpcreadyTools < Formula
     system bin/"idsk", "--version"
     system bin/"cpc-update-var", "--version"
     assert_predicate libexec/"cpc-common.sh", :exist?, "cpc-common.sh no se instaló correctamente"
+    system "#{bin}/cpc_ini", "--help"  # o algún test simple de cpc_ini
   end
 end
