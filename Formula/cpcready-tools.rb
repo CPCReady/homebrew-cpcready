@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.5"
+  version "1.0.6"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -39,6 +39,7 @@ class CpcreadyTools < Formula
   depends_on "direnv"
 
   def install
+    # Instalar el binario principal iDSK
     if OS.mac?
       if Hardware::CPU.arm?
         bin.install "iDSK-mac-arm64" => "idsk"
@@ -52,19 +53,21 @@ class CpcreadyTools < Formula
         bin.install "iDSK-linux-x86_64" => "idsk"
       end
     end
+
+    # Instalar el script cpc-update-var en bin
     resource("cpc-update-var").stage do
       bin.install "cpc-update-var"
     end
-    libexec.install "cpc-common.sh"
-    # resource("cpc-common.sh").stage do
-    #   (libexec/"cpc-common.sh").install "cpc-common.sh"
-    # end
-  end
 
-  
+    # Instalar cpc-common.sh en libexec para ser usado vía source
+    resource("cpc-common.sh").stage do
+      libexec.install "cpc-common.sh"
+    end
+  end
 
   test do
     system bin/"idsk", "--version"
     system bin/"cpc-update-var", "--version"
+    assert_predicate libexec/"cpc-common.sh", :exist?, "cpc-common.sh no se instaló correctamente"
   end
 end
