@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.8"
+  version "1.0.9"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -73,8 +73,8 @@ class CpcreadyTools < Formula
     # Compilar e instalar cpc_ini
     resource("cpc-ini").stage do
       system "gcc", "-I#{Formula["inih"].opt_include}", "-L#{Formula["inih"].opt_lib}",
-             "-o", "cpc_ini", "main.c", "-linih"
-      bin.install "cpc_ini"
+             "-o", "cpc-ini", "main.c", "-linih"
+      bin.install "cpc-ini"
     end
   end
 
@@ -82,6 +82,6 @@ class CpcreadyTools < Formula
     system bin/"idsk", "--version"
     system bin/"cpc-update-var", "--version"
     assert_predicate libexec/"cpc-common.sh", :exist?, "cpc-common.sh no se instaló correctamente"
-    system "#{bin}/cpc_ini", "--help"  # o algún test simple de cpc_ini
+    system "#{bin}/cpc-ini", "--help"  # o algún test simple de cpc_ini
   end
 end
