@@ -1,7 +1,7 @@
 class CpcreadyTools < Formula
   desc "CPCReady Tools"
   homepage "https://github.com/CPCReady/homebrew-cpcready"
-  version "1.0.4"
+  version "1.0.5"
 
   on_macos do
     if Hardware::CPU.arm?
@@ -55,10 +55,10 @@ class CpcreadyTools < Formula
     resource("cpc-update-var").stage do
       bin.install "cpc-update-var"
     end
-    # libexec.install "cpc-common.sh" => "cpc-common.sh"
-    resource("cpc-common.sh").stage do
-      (libexec/"cpc-common.sh").install "cpc-common.sh"
-    end
+    libexec.install "cpc-common.sh"
+    # resource("cpc-common.sh").stage do
+    #   (libexec/"cpc-common.sh").install "cpc-common.sh"
+    # end
   end
 
   
