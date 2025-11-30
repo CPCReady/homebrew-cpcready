@@ -21,6 +21,13 @@ jobs:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: Remove any existing taps
+        continue-on-error: true
+        run: |
+          # Eliminar cualquier tap existente de cpcready para evitar conflictos
+          brew untap cpcready/cpcready 2>/dev/null || true
+          brew untap cpcready/cpcready-test 2>/dev/null || true
+
       - name: Create local tap
         run: |
           # Crear directorio del tap con nombre temporal para testing
