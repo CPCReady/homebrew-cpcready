@@ -8,7 +8,13 @@ class Cpc < Formula
   license "MIT"
 
   depends_on "libyaml"
+  depends_on "rust" => :build
   depends_on "python@3.13"
+
+  resource "maturin" do
+    url "https://files.pythonhosted.org/packages/02/44/c593afce7d418ae6016b955c978055232359ad28c707a9ac6643fc60512d/maturin-1.10.2.tar.gz"
+    sha256 "259292563da89850bf8f7d37aa4ddba22905214c1e180b1c8f55505dfd8c0e81"
+  end
 
   resource "click" do
     url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
