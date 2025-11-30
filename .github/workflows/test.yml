@@ -1,0 +1,58 @@
+name: Test Formula
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    test-formula:
+        name: Test on ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest]
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Homebrew
+              id: set-up-homebrew
+              uses: Homebrew/actions/setup-homebrew@master
+
+            - name: Install formula
+              run: |
+                  brew tap CPCReady/cpcready ${{ github.workspace }}
+                  brew install cpc
+
+            - name: Test installation
+              run: |
+                  # Verificar que el comando existe
+                  which cpc
+
+                  # Verificar la versión
+                  cpc --version
+
+                  # Verificar la ayuda
+                  cpc --help
+
+            - name: Run Homebrew tests
+              run: |
+                  brew test cpc
+
+            - name: Audit formula
+              run: |
+                  brew audit --strict cpc
+
+            - name: Check formula style
+              run: |
+                  brew style cpc
+
+            - name: Uninstall formula
+              if: always()
+              run: |
+                  brew uninstall cpc || true
+                  brew untap CPCReady/cpcready || true

@@ -1,0 +1,42 @@
+name: Validate Formula
+
+on:
+    push:
+        paths:
+            - "Formula/**"
+    pull_request:
+        paths:
+            - "Formula/**"
+    workflow_dispatch:
+
+jobs:
+    validate:
+        name: Validate Formula Syntax
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Homebrew
+              uses: Homebrew/actions/setup-homebrew@master
+
+            - name: Tap repository
+              run: |
+                  brew tap CPCReady/cpcready ${{ github.workspace }}
+
+            - name: Validate formula syntax
+              run: |
+                  brew audit --strict --online cpc
+
+            - name: Check formula style
+              run: |
+                  brew style cpc
+
+            - name: Check formula dependencies
+              run: |
+                  brew info cpc
+
+            - name: Verify formula can be parsed
+              run: |
+                  brew info --json=v2 cpc | jq '.'

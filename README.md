@@ -6,7 +6,23 @@ Tap oficial de Homebrew para **CPCReady**, una herramienta de desarrollo para Am
 
 Este repositorio contiene la fórmula de Homebrew para instalar CPCReady, una herramienta completa para el desarrollo de software para el ordenador Amstrad CPC. CPCReady incluye compiladores, ensambladores y utilidades para facilitar la creación de programas para esta plataforma retro.
 
-## 🚀 Instalación
+## � Estado de CI/CD
+
+![Test Formula](https://github.com/CPCReady/homebrew-cpcready/workflows/Test%20Formula/badge.svg)
+![Validate Formula](https://github.com/CPCReady/homebrew-cpcready/workflows/Validate%20Formula/badge.svg)
+
+Este tap incluye pruebas automáticas que se ejecutan en:
+- **Ubuntu Latest**: Verifica la instalación en Linux
+- **macOS Latest**: Verifica la instalación en macOS
+
+Los workflows automáticos validan:
+- ✅ Instalación correcta de la fórmula
+- ✅ Ejecución de comandos básicos (`--version`, `--help`)
+- ✅ Tests de Homebrew
+- ✅ Auditoría de la fórmula
+- ✅ Verificación de estilo de código
+
+## �🚀 Instalación
 
 ### Instalación rápida
 
@@ -98,6 +114,27 @@ brew audit --strict cpc
 # Probar la fórmula
 brew test cpc
 ```
+
+### Workflows de GitHub Actions
+
+Este repositorio incluye dos workflows automáticos:
+
+#### 1. **Test Formula** (`.github/workflows/test.yml`)
+Se ejecuta en cada push y pull request. Prueba la fórmula en Ubuntu y macOS:
+- Instala la fórmula desde el tap
+- Verifica que los comandos funcionen
+- Ejecuta los tests de Homebrew
+- Audita la fórmula
+- Verifica el estilo de código
+
+#### 2. **Validate Formula** (`.github/workflows/validate.yml`)
+Se ejecuta cuando se modifican archivos en `Formula/`:
+- Valida la sintaxis de la fórmula
+- Verifica el estilo de código
+- Comprueba las dependencias
+- Valida que la fórmula se pueda parsear correctamente
+
+Puedes ejecutar manualmente cualquier workflow desde la pestaña "Actions" en GitHub.
 
 ## 📝 Información de la fórmula
 
