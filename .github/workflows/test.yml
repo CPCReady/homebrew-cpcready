@@ -23,10 +23,25 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Install formula from local file
+      - name: Create local tap
         run: |
-          # Instalar directamente desde el archivo de fórmula
-          brew install --build-from-source ${{ github.workspace }}/Formula/cpc.rb
+          # Crear directorio del tap con nombre temporal para testing
+          mkdir -p $(brew --repository)/Library/Taps/cpcready/homebrew-cpcready-test
+
+          # Copiar la fórmula al tap temporal
+          cp -r ${{ github.workspace }}/Formula $(brew --repository)/Library/Taps/cpcready/homebrew-cpcready-test/
+
+          # Crear un .git vacío para que Homebrew lo reconozca como tap
+          cd $(brew --repository)/Library/Taps/cpcready/homebrew-cpcready-test
+          git init
+          git config user.email "test@test.com"
+          git config user.name "Test"
+          git add .
+          git commit -m "Test formula"
+
+      - name: Install formula
+        run: |
+          brew install cpcready-test/cpc
 
       - name: Test installation
         run: |
@@ -41,15 +56,15 @@ jobs:
 
       - name: Run Homebrew tests
         run: |
-          brew test cpc
+          brew test cpcready-test/cpc
 
       - name: Audit formula
         run: |
-          brew audit --strict ${{ github.workspace }}/Formula/cpc.rb
+          brew audit --strict cpcready-test/cpc
 
       - name: Check formula style
         run: |
-          brew style ${{ github.workspace }}/Formula/cpc.rb
+          brew style cpcready-test/cpc
 
       - name: Cleanup
         if: always()
@@ -57,6 +72,9 @@ jobs:
         run: |
           # Desinstalar la fórmula
           brew uninstall cpc 2>/dev/null || true
+
+          # Eliminar el tap temporal
+          brew untap cpcready/cpcready-test 2>/dev/null || true
 
           # Limpiar cache de Homebrew
           brew cleanup 2>/dev/null || true

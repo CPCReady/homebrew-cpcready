@@ -21,29 +21,46 @@ jobs:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: Create local tap
+        run: |
+          # Crear directorio del tap con nombre temporal para testing
+          mkdir -p $(brew --repository)/Library/Taps/cpcready/homebrew-cpcready-test
+
+          # Copiar la fórmula al tap temporal
+          cp -r ${{ github.workspace }}/Formula $(brew --repository)/Library/Taps/cpcready/homebrew-cpcready-test/
+
+          # Crear un .git vacío para que Homebrew lo reconozca como tap
+          cd $(brew --repository)/Library/Taps/cpcready/homebrew-cpcready-test
+          git init
+          git config user.email "test@test.com"
+          git config user.name "Test"
+          git add .
+          git commit -m "Test formula"
+
       - name: Validate formula syntax
         run: |
-          brew audit --strict --online ${{ github.workspace }}/Formula/cpc.rb
+          brew audit --strict --online cpcready-test/cpc
 
       - name: Check formula style
         run: |
-          brew style ${{ github.workspace }}/Formula/cpc.rb
+          brew style cpcready-test/cpc
 
       - name: Install formula to test dependencies
         run: |
-          brew install --build-from-source ${{ github.workspace }}/Formula/cpc.rb
+          brew install cpcready-test/cpc
 
       - name: Check formula dependencies
         run: |
-          brew info cpc
+          brew info cpcready-test/cpc
 
       - name: Verify formula can be parsed
         run: |
-          brew info --json=v2 cpc | jq '.'
+          brew info --json=v2 cpcready-test/cpc | jq '.'
 
       - name: Cleanup
         if: always()
         continue-on-error: true
         run: |
           brew uninstall cpc 2>/dev/null || true
+          brew untap cpcready/cpcready-test 2>/dev/null || true
           brew cleanup 2>/dev/null || true
