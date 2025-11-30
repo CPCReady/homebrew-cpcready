@@ -46,28 +46,28 @@ jobs:
 
       - name: Validate formula syntax
         run: |
-          brew audit --strict --online cpcready-test/cpc
+          brew audit --strict --online cpcready/cpcready-test/cpc
 
       - name: Check formula style
         run: |
-          brew style cpcready-test/cpc
+          brew style cpcready/cpcready-test/cpc
 
       - name: Install formula to test dependencies
         run: |
-          brew install cpcready-test/cpc
+          brew install cpcready/cpcready-test/cpc
 
       - name: Check formula dependencies
         run: |
-          brew info cpcready-test/cpc
+          brew info cpcready/cpcready-test/cpc
 
       - name: Verify formula can be parsed
         run: |
-          brew info --json=v2 cpcready-test/cpc | jq '.'
+          brew info --json=v2 cpcready/cpcready-test/cpc | jq '.'
 
       - name: Cleanup
         if: always()
         continue-on-error: true
         run: |
-          brew uninstall cpcready-test/cpc 2>/dev/null || true
+          brew uninstall cpcready/cpcready-test/cpc 2>/dev/null || true
           brew untap cpcready/cpcready-test 2>/dev/null || true
           brew cleanup 2>/dev/null || true

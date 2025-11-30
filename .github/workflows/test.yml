@@ -48,7 +48,7 @@ jobs:
 
       - name: Install formula
         run: |
-          brew install cpcready-test/cpc
+          brew install cpcready/cpcready-test/cpc
 
       - name: Test installation
         run: |
@@ -63,22 +63,22 @@ jobs:
 
       - name: Run Homebrew tests
         run: |
-          brew test cpcready-test/cpc
+          brew test cpcready/cpcready-test/cpc
 
       - name: Audit formula
         run: |
-          brew audit --strict cpcready-test/cpc
+          brew audit --strict cpcready/cpcready-test/cpc
 
       - name: Check formula style
         run: |
-          brew style cpcready-test/cpc
+          brew style cpcready/cpcready-test/cpc
 
       - name: Cleanup
         if: always()
         continue-on-error: true
         run: |
           # Desinstalar la fórmula usando el nombre completo
-          brew uninstall cpcready-test/cpc 2>/dev/null || true
+          brew uninstall cpcready/cpcready-test/cpc 2>/dev/null || true
 
           # Eliminar el tap temporal
           brew untap cpcready/cpcready-test 2>/dev/null || true
