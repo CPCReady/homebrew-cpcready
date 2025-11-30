@@ -7,8 +7,8 @@ class Cpc < Formula
   sha256 "8a74e3ae994b44cd62095fef0e64a0f7ae9345adbe12c4c4f6f7d4552b8733b7"
   license "MIT"
 
-  depends_on "python@3.13"
   depends_on "libyaml"
+  depends_on "python@3.13"
 
   resource "click" do
     url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
