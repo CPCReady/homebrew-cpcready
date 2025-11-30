@@ -1,69 +1,62 @@
 name: Test Formula
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        branches: [main]
-    workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
-    test-formula:
-        name: Test on ${{ matrix.os }}
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                os: [ubuntu-latest, macos-latest]
+  test-formula:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Set up Homebrew
-              id: set-up-homebrew
-              uses: Homebrew/actions/setup-homebrew@master
-              continue-on-error: true
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
 
-            - name: Tap repository
-              run: |
-                  brew tap CPCReady/cpcready ${{ github.workspace }}
+      - name: Install formula from local file
+        run: |
+          # Instalar directamente desde el archivo de fórmula
+          brew install --build-from-source ${{ github.workspace }}/Formula/cpc.rb
 
-            - name: Install formula
-              run: |
-                  brew install cpc
+      - name: Test installation
+        run: |
+          # Verificar que el comando existe
+          which cpc
 
-            - name: Test installation
-              run: |
-                  # Verificar que el comando existe
-                  which cpc
+          # Verificar la versión
+          cpc --version
 
-                  # Verificar la versión
-                  cpc --version
+          # Verificar la ayuda
+          cpc --help
 
-                  # Verificar la ayuda
-                  cpc --help
+      - name: Run Homebrew tests
+        run: |
+          brew test cpc
 
-            - name: Run Homebrew tests
-              run: |
-                  brew test cpc
+      - name: Audit formula
+        run: |
+          brew audit --strict ${{ github.workspace }}/Formula/cpc.rb
 
-            - name: Audit formula
-              run: |
-                  brew audit --strict cpc
+      - name: Check formula style
+        run: |
+          brew style ${{ github.workspace }}/Formula/cpc.rb
 
-            - name: Check formula style
-              run: |
-                  brew style cpc
+      - name: Cleanup
+        if: always()
+        continue-on-error: true
+        run: |
+          # Desinstalar la fórmula
+          brew uninstall cpc 2>/dev/null || true
 
-            - name: Cleanup
-              if: always()
-              continue-on-error: true
-              run: |
-                  # Desinstalar la fórmula
-                  brew uninstall cpc 2>/dev/null || true
-
-                  # Eliminar el tap
-                  brew untap CPCReady/cpcready 2>/dev/null || true
-
-                  # Limpiar cache de Homebrew
-                  brew cleanup 2>/dev/null || true
+          # Limpiar cache de Homebrew
+          brew cleanup 2>/dev/null || true

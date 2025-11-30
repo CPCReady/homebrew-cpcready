@@ -1,42 +1,49 @@
 name: Validate Formula
 
 on:
-    push:
-        paths:
-            - "Formula/**"
-    pull_request:
-        paths:
-            - "Formula/**"
-    workflow_dispatch:
+  push:
+    paths:
+      - "Formula/**"
+  pull_request:
+    paths:
+      - "Formula/**"
+  workflow_dispatch:
 
 jobs:
-    validate:
-        name: Validate Formula Syntax
-        runs-on: ubuntu-latest
+  validate:
+    name: Validate Formula Syntax
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Set up Homebrew
-              uses: Homebrew/actions/setup-homebrew@master
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
 
-            - name: Tap repository
-              run: |
-                  brew tap CPCReady/cpcready ${{ github.workspace }}
+      - name: Validate formula syntax
+        run: |
+          brew audit --strict --online ${{ github.workspace }}/Formula/cpc.rb
 
-            - name: Validate formula syntax
-              run: |
-                  brew audit --strict --online cpc
+      - name: Check formula style
+        run: |
+          brew style ${{ github.workspace }}/Formula/cpc.rb
 
-            - name: Check formula style
-              run: |
-                  brew style cpc
+      - name: Install formula to test dependencies
+        run: |
+          brew install --build-from-source ${{ github.workspace }}/Formula/cpc.rb
 
-            - name: Check formula dependencies
-              run: |
-                  brew info cpc
+      - name: Check formula dependencies
+        run: |
+          brew info cpc
 
-            - name: Verify formula can be parsed
-              run: |
-                  brew info --json=v2 cpc | jq '.'
+      - name: Verify formula can be parsed
+        run: |
+          brew info --json=v2 cpc | jq '.'
+
+      - name: Cleanup
+        if: always()
+        continue-on-error: true
+        run: |
+          brew uninstall cpc 2>/dev/null || true
+          brew cleanup 2>/dev/null || true
