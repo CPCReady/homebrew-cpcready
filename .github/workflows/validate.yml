@@ -61,6 +61,6 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-          brew uninstall cpc 2>/dev/null || true
+          brew uninstall cpcready-test/cpc 2>/dev/null || true
           brew untap cpcready/cpcready-test 2>/dev/null || true
           brew cleanup 2>/dev/null || true

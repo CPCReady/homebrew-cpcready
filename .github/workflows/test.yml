@@ -70,8 +70,8 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-          # Desinstalar la fórmula
-          brew uninstall cpc 2>/dev/null || true
+          # Desinstalar la fórmula usando el nombre completo
+          brew uninstall cpcready-test/cpc 2>/dev/null || true
 
           # Eliminar el tap temporal
           brew untap cpcready/cpcready-test 2>/dev/null || true
