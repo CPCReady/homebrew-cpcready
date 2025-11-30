@@ -8,6 +8,7 @@ class Cpc < Formula
   license "MIT"
 
   depends_on "python@3.13"
+  depends_on "libyaml"
 
   resource "click" do
     url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
@@ -39,7 +40,7 @@ class Cpc < Formula
     sha256 "73ff50c7c0c1c77c8243079283f4edb376f0f6442433aecb8ce7e6d0b92d1fe4"
   end
 
-  resource "prompt_toolkit" do
+  resource "prompt-toolkit" do
     url "https://files.pythonhosted.org/packages/a1/96/06e01a7b38dce6fe1db213e061a4602dd6032a8a97ef6c1a862537732421/prompt_toolkit-3.0.52.tar.gz"
     sha256 "28cde192929c8e7321de85de1ddbe736f1375148b02f2e17edd840042b1be855"
   end
@@ -84,7 +85,7 @@ class Cpc < Formula
     sha256 "09bde70316ebb184cb314635dfe8e69fc52253a75bf3a30d1651e32278fd3026"
   end
 
-  resource "tomli_w" do
+  resource "tomli-w" do
     url "https://files.pythonhosted.org/packages/19/75/241269d1da26b624c0d5e110e8149093c759b7a286138f4efd61a60e75fe/tomli_w-1.2.0.tar.gz"
     sha256 "2dd14fac5a47c27be9cd4c976af5a12d87fb1f0b4512f81d69cce3b35ae25021"
   end
