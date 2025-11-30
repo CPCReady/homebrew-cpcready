@@ -22,10 +22,14 @@ jobs:
             - name: Set up Homebrew
               id: set-up-homebrew
               uses: Homebrew/actions/setup-homebrew@master
+              continue-on-error: true
+
+            - name: Tap repository
+              run: |
+                  brew tap CPCReady/cpcready ${{ github.workspace }}
 
             - name: Install formula
               run: |
-                  brew tap CPCReady/cpcready ${{ github.workspace }}
                   brew install cpc
 
             - name: Test installation
@@ -51,8 +55,15 @@ jobs:
               run: |
                   brew style cpc
 
-            - name: Uninstall formula
+            - name: Cleanup
               if: always()
+              continue-on-error: true
               run: |
-                  brew uninstall cpc || true
-                  brew untap CPCReady/cpcready || true
+                  # Desinstalar la fórmula
+                  brew uninstall cpc 2>/dev/null || true
+
+                  # Eliminar el tap
+                  brew untap CPCReady/cpcready 2>/dev/null || true
+
+                  # Limpiar cache de Homebrew
+                  brew cleanup 2>/dev/null || true
