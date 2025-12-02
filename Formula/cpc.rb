@@ -76,7 +76,7 @@ class Cpc < Formula
 
   resource "idna" do
     url "https://files.pythonhosted.org/packages/f1/70/7703c29685631f5a7590aa73f1f1d3fa9a380e654b86af429e0934a32f7d/idna-3.10.tar.gz"
-    sha256 "12f65c9b470abda6dc35237f51a7e3baa08f3c70ad0c00c97b5cd7a8dc7e1e75"
+    sha256 "12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9"
   end
 
   resource "urllib3" do
@@ -86,7 +86,7 @@ class Cpc < Formula
 
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/0f/bd/1d41ee578ce09523c81a15426705dd20969f5abf006d1afe8aeff0dd776a/certifi-2024.12.14.tar.gz"
-    sha256 "b650d30f370c2b724812bee08008d0d6ad5ff5d55f7a1c4c4f5f6e1e7ee66b5f"
+    sha256 "b650d30f370c2b724812bee08008be0c4163b163ddaec3f2546c1caf65f191db"
   end
 
   def install
