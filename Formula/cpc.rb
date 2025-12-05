@@ -3,8 +3,8 @@ class Cpc < Formula
 
   desc "CPCReady - Amstrad CPC development tool"
   homepage "https://github.com/CPCReady/cpc"
-  url "https://github.com/CPCReady/cpc/archive/refs/tags/v0.0.0.tar.gz"
-  sha256 "74f53ee1088c13bd70553bdf3dfe4290f0413ad2d0533a14a682ab4bf1f961cb"
+  url "https://github.com/CPCReady/cpc/archive/refs/tags/v0.1.0.tar.gz"
+  sha256 "d05da1f53fd393c5a012d7a933670f920920cd3183aa525bbf853e69be29a628"
   license "MIT"
 
   depends_on "python@3.13"
